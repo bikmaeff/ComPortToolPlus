@@ -1,0 +1,8 @@
+ComPortToolPlus
+
+a COM port debug tool with data visualization.
+
+Qt version: qt-opensource-windows-x86-mingw530-5.7.0
+Compiling platform: Microsoft Windows 10 professional 64bit
+
+Contact: ZHAO Ming-qi, zhao.mingqi@foxmail.com
