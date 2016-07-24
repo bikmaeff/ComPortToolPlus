@@ -19,7 +19,7 @@ void ReceiveThread::run()
         dataArray = serialPort->readAll();
         for(QByteArray::Iterator iter = dataArray.begin(); iter != dataArray.end(); iter++)
         {
-            emit receivedDataByte((unsigned char)(*iter));
+            emit receivedDataByte(*iter);
         }
     }
 }

@@ -6,6 +6,7 @@
 #include <QTime>
 
 #include "qcustomplot.h"
+#include "qthinkgear.h"
 
 namespace Ui {
 class WaveWindow;
@@ -20,7 +21,7 @@ public:
     ~WaveWindow();
 
 private slots:
-    void getByteData(unsigned char data);
+    void getByteData(char data);
 
     void on_comboBoxProtocalSelector_activated(int index);
     void on_horizontalSliderXResolution_valueChanged(int value);
@@ -33,6 +34,8 @@ private:
     void setVersionRelatedSyle();
     void setUpPlayground();
     void initiaions();
+    void addWaveData(double data);
+
 private:
     int currentProtocal = 0;
     Ui::WaveWindow *ui;
@@ -41,6 +44,8 @@ private:
     float yRangeMin;
     bool isAutoScale;
     bool isDiscOpen;
+
+    QThinkGear thinkGear;
 };
 
 #endif // WAVEWINDOW_H

@@ -33,19 +33,28 @@ void WaveWindow::on_comboBoxProtocalSelector_activated(int index)
     // 0 equals no protocal applied
     currentProtocal = index;
 }
-void WaveWindow::getByteData(unsigned char data)
+void WaveWindow::getByteData(char data)
 {
 
     //apply protocal to parse data
     switch (currentProtocal)
     {
         case 0: //No protocal
+            addWaveData((unsigned char) (data));//add a wave data directly
+            break;
+        case 1:
+            thinkGear.addByteToPackage(data);
+            if(thinkGear.isNewRawReady())
+            {
+                addWaveData(thinkGear.getRaw());
+            }
             break;
         default:
             break;
     }
-
-
+}
+void WaveWindow::addWaveData(double data)
+{
     double key= QDateTime::currentDateTime().toMSecsSinceEpoch()/1000;
     static double lastPointKey = 0;
     if(key - lastPointKey > 0.0001)//Frequency resolution, 0.0001 means upto 1KHz. Gui performance will be low if too high
@@ -69,8 +78,8 @@ void WaveWindow::getByteData(unsigned char data)
     }
     ui->widgetQCustomPlot->xAxis->setRange(key+1.0/xResolution,xResolution,Qt::AlignRight);
     ui->widgetQCustomPlot->replot();
-
 }
+
 void WaveWindow::setUpPlayground()
 {
     xResolution = 50;

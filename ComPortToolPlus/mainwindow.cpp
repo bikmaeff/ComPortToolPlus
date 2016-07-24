@@ -25,7 +25,7 @@ void MainWindow::initiations()
     sendThread = new SendThread(this);
     sendThread->setSerialPort(serialPort);
 
-    connect(receiveThread, SIGNAL(receivedDataByte(unsigned char)), this, SLOT(getByteData(unsigned char)));
+    connect(receiveThread, SIGNAL(receivedDataByte(char)), this, SLOT(getByteData(char)));
     connect(sendThread,SIGNAL(sendDataOnce()),this,SLOT(sendDataOnce()));
     connect(sendThread,SIGNAL(finished()),this,SLOT(sendThreadFinished()));
 
@@ -48,7 +48,7 @@ void MainWindow::disposes()
     sendThread->terminate();
 
     serialPort->close();
-    disconnect(receiveThread, SIGNAL(receivedDataByte(unsigned char)), this, SLOT(getByteData(unsigned char)));
+    disconnect(receiveThread, SIGNAL(receivedDataByte(char)), this, SLOT(getByteData(char)));
     disconnect(sendThread,SIGNAL(sendDataOnce()),this,SLOT(sendDataOnce()));
     disconnect(sendThread,SIGNAL(finished()),this,SLOT(sendThreadFinished()));
     delete receiveThread;
@@ -342,7 +342,7 @@ void MainWindow::on_checkBoxDisplayTime_toggled(bool checked)
 void MainWindow::on_pushButtonOscWindow_clicked()
 {
     waveWindow = new WaveWindow(this);
-    connect(receiveThread,SIGNAL(receivedDataByte(unsigned char)),waveWindow,SLOT(getByteData(unsigned char)));
+    connect(receiveThread,SIGNAL(receivedDataByte(char)),waveWindow,SLOT(getByteData(char)));
     waveWindow->show();
     ui->statusBar->showMessage(tr("OSC window opened."), 3000);
 }
@@ -440,15 +440,15 @@ void MainWindow::displayText(const QString& text)
     }
     ui->textBrowserRecieved->moveCursor(QTextCursor::End);
 }
-void MainWindow::getByteData(unsigned char byteData)
+void MainWindow::getByteData(char byteData)
 {
     ui->labelReceiveCount->setText(transformCount(receiveCount++));
     QString strByteData;
     switch(ui->comboBoxReceiveCodeSelection->currentIndex())
     {
         case 0:
-            strByteData.setNum(byteData,16);
-            if(byteData <= 0x0F)
+            strByteData.setNum((unsigned char)(byteData),16);
+            if( strByteData.length() == 1)
             {
                 strByteData = QString("0")+strByteData;
             }
@@ -650,11 +650,10 @@ void MainWindow::sendDataOnce()
 {
     if(ui->checkBoxRepeatTrans->isChecked() && ui->checkBoxSeparation->isChecked())
     {
-        if(dataToSend[byteIter] != '\0')
+        if(byteIter < dataToSend.length())
         {
-            char tempData[2];
-            tempData[0] = dataToSend[byteIter];
-            tempData[1] = '\0';
+            QByteArray tempData;
+            tempData.append(dataToSend.at(byteIter));
             sendCount = sendCount + float(serialPort->write(tempData));
             byteIter++;
         }
@@ -680,10 +679,10 @@ void MainWindow::sendThreadFinished()
     ui->pushButtonSendData->setText(tr("Send"));
     ui->pushButtonSendData->setDisabled(false);
 }
-void MainWindow::parseAsHex(char *data, QString strData)
+void MainWindow::parseAsHex(QString strData)
 {
+    dataToSend.clear();
     strData.remove(QChar(' '));
-    int iterChar = 0;
     QString tempString;
     if(strData.length()%2 != 0)
     {
@@ -694,24 +693,24 @@ void MainWindow::parseAsHex(char *data, QString strData)
     {
         tempString.append(*iter);
         tempString.append(*(iter+1));
-        data[iterChar] = tempString.toInt(Q_NULLPTR,16);
-        iterChar++;
+        dataToSend.append((unsigned char)(tempString.toInt(Q_NULLPTR, 16)));
+        //data[iterChar] = tempString.toInt(Q_NULLPTR,16);
         tempString.clear();
     }
-    data[iterChar] = '\0';
 }
 void MainWindow::parseDataToSend()
 {
+    dataToSend.clear();
     switch(ui->comboBoxSendCodeSelection->currentIndex())
     {
         case 0://HEX
-            parseAsHex(dataToSend,ui->lineEditDataToSend->text());
+            parseAsHex(ui->lineEditDataToSend->text());
             break;
         case 1://ASCII
-            strcpy(dataToSend,ui->lineEditDataToSend->text().toStdString().c_str());
+            dataToSend.append(ui->lineEditDataToSend->text());
             break;
         default://HEX
-            strcpy(dataToSend,ui->lineEditDataToSend->text().toStdString().c_str());
+            dataToSend.append(ui->lineEditDataToSend->text());
             break;
     }
 }

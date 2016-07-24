@@ -21,14 +21,16 @@ SOURCES += main.cpp\
     receivethread.cpp \
     sendthread.cpp \
     mainwindow.cpp \
-    aboutwindow.cpp
+    aboutwindow.cpp \
+    qthinkgear.cpp
 
 HEADERS  += mainwindow.h \
     wavewindow.h \
     qcustomplot.h \
     receivethread.h \
     sendthread.h \
-    aboutwindow.h
+    aboutwindow.h \
+    qthinkgear.h
 
 FORMS    += mainwindow.ui \
     wavewindow.ui \

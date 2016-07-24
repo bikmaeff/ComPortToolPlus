@@ -15,7 +15,7 @@ public:
     void run();
     void setSerialPort(QSerialPort* port);
 signals:
-    void receivedDataByte(unsigned char);
+    void receivedDataByte(char);
 private:
     QSerialPort* serialPort;
 

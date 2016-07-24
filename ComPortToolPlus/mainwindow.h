@@ -70,7 +70,7 @@ private slots:
     void on_lineEditDataToSend_returnPressed();
     void on_lineEditDataToSend_textEdited(const QString &arg1);
 
-    void getByteData(unsigned char);
+    void getByteData(char);
     void sendDataOnce();
     void sendThreadFinished();
 
@@ -84,7 +84,7 @@ private:
     bool startListenSerialPort(QString port);
     QString transformCount(float count);
     void parseDataToSend();
-    void parseAsHex(char* data, QString strData);
+    void parseAsHex(QString strData);
     void sendData();
     void adjustWindow();
 
@@ -108,7 +108,7 @@ private:
     SendThread* sendThread;
     float receiveCount;
     float sendCount;
-    char dataToSend[5001];
+    QByteArray dataToSend;
 
     QTime time;
 

@@ -33,7 +33,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="100"/>
-        <location filename="mainwindow.cpp" line="680"/>
+        <location filename="mainwindow.cpp" line="679"/>
         <source>Send</source>
         <translation></translation>
     </message>
@@ -531,12 +531,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="690"/>
+        <location filename="mainwindow.cpp" line="689"/>
         <source>Hex data is not correct, please check!</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="724"/>
+        <location filename="mainwindow.cpp" line="723"/>
         <source>Data will be sent circularly and separately.</source>
         <translation></translation>
     </message>
@@ -569,54 +569,54 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="40"/>
+        <location filename="wavewindow.ui" line="120"/>
         <source>Resolution:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="100"/>
+        <location filename="wavewindow.ui" line="204"/>
         <source>Signal Type: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="126"/>
+        <location filename="wavewindow.ui" line="236"/>
         <source>Discrete</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="131"/>
+        <location filename="wavewindow.ui" line="241"/>
         <source>Continuous</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="184"/>
-        <source>Think Gear AM (unavailabe yet)</source>
+        <location filename="wavewindow.ui" line="312"/>
+        <source>Think Gear AM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="210"/>
-        <location filename="wavewindow.cpp" line="120"/>
+        <location filename="wavewindow.ui" line="344"/>
+        <location filename="wavewindow.cpp" line="129"/>
         <source>Disable Auto Scale</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="239"/>
+        <location filename="wavewindow.ui" line="58"/>
         <source>Data Wave</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="145"/>
+        <location filename="wavewindow.ui" line="267"/>
         <source>Parsing Protocal:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.ui" line="175"/>
-        <location filename="wavewindow.ui" line="179"/>
+        <location filename="wavewindow.ui" line="303"/>
+        <location filename="wavewindow.ui" line="307"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="wavewindow.cpp" line="115"/>
+        <location filename="wavewindow.cpp" line="124"/>
         <source>Enable Auto Scale</source>
         <translation></translation>
     </message>
